@@ -2,17 +2,21 @@ import { useState } from 'react'
 import './App.css'
 import Head from './components/Head'
 import Body from './components/Body'
+import { Provider } from 'react-redux'
+import store from './utils/store'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-    <>
-    <div className='bg-slate-100 h-screen w-screen'>
+    
+    <Provider store={store}>
+    <div className='bg-slate-400 h-screen w-screen'>
     <Head/>
     <Body/>
     </div>
-    </>
+    </Provider>
+    
   )
 }
 
