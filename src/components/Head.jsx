@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleMenu } from '../utils/appSlice';
+import { Link } from 'react-router-dom';
 
 
 const Head = () => {
@@ -13,14 +14,20 @@ const Head = () => {
   }
 
   return  (
-    <div className='flex itemscenter justify-between px-2 py-5' >
+    <div className='flex itemscenter justify-between px-2 py-5 shadow-sm' >
 
       <div className='flex gap-5'>
         <img 
          onClick={()=>toggleHandler()}
          className='h-7 cursor-pointer' src="/menu.png" alt="menu" />
+          <Link to="/" >
         <img className='h-7' src="/youtube.png" alt="youtube" />
+        </Link>
       </div>
+
+      
+       
+       
 
       <div className='w-1/4'>
         <input 
