@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Chatmessage = ({props,id}) => {
-    console.log(props)
+    
   return (
     <div className='p-5 flex gap-2 items-center border-b-2 shadow-lg' >
       <img className='h-8' src="/dummy.png" alt="" />
