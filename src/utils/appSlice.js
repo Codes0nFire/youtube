@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-
+// applied the toggle functonality using the toggleMenu
 const appSlice=createSlice({
     name:"app",
     initialState:{

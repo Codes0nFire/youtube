@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleMenu } from '../utils/appSlice';
 import { Link } from 'react-router-dom';
+import { storeCache } from '../utils/cacheSlice';
 
 
 const Head = () => {
   
   
-  const dispatch=useDispatch();
+const dispatch=useDispatch();
+// subscribe to store(not whole store but cache in store )
+const savedcache=useSelector((store)=>store.cache)
+
   // Dispaching action on click of menu
   const toggleHandler=()=>{
        dispatch(toggleMenu());
@@ -19,13 +23,18 @@ let search_api=import.meta.env.VITE_SEARCH
 
 const [searchQuery, setsearchQuery] = useState("")
 const [suggestion, setsuggestion] = useState([])
+// function to get search data using search api
 const getsearchdata=async()=>{
   
    let blob=await fetch(`${search_api}${searchQuery}`)
    let data=await blob.json();
   //  setting the resonse suggestion in suggestion state
    setsuggestion(data[1])
-   
+  //  saving the data in cache
+   dispatch(storeCache({
+    // computed property names in JavaScript.
+    [searchQuery]:data[1]
+   }));
 }
 
 
@@ -38,10 +47,20 @@ useEffect(()=>{
   // getsearchdata();
 
   // applying debouncing(<500ms)
-  let timerid=setTimeout(()=>getsearchdata(),300)
+  
+  //searching the data in cache if found dont call api
+
+  let timerid=setTimeout(()=>{
+    if(savedcache[searchQuery]){
+      setsuggestion(savedcache[searchQuery])
+    }
+    else{
+      getsearchdata()
+    }
+    },300)
  
   // in order to clear the timeout if another api request is made before the 
-  // assihned debounceing time 
+  // assigned debounceing time 
   return ()=>{
     clearTimeout(timerid);
   }
