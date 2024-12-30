@@ -2,12 +2,14 @@ import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Head from './Head';
 import CommentContainer from './CommentContainer';
+import Livechat from './Livechat';
 
 const WatchPage = () => {
   const [video,setvideo]=useSearchParams();
-  return (
-    <div className='bg-slate-100' >
+  return (<>
     <Head/>
+    <div className='bg-slate-100 flex p-5' >
+
     <div className='videoandcomments w-3/4'>
 
     <div className='pb-14 px-12  '>
@@ -16,7 +18,11 @@ const WatchPage = () => {
 
     <CommentContainer/>
     </div>
+    <div className='livechat w-full h-[75vh]  ' >
+       <Livechat/>
     </div>
+    </div>
+    </>
   )
 }
 

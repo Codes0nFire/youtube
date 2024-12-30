@@ -10,7 +10,7 @@ const Commentlist = ({mockData}) => {
         {mockData && mockData.map((c,i)=>{
 
           return <div key={i}> <Comment data={c}/>
-         { <div className='ml-4 border-l-2 border-gray-300' >
+         { <div className='ml-4 border-l-2 border-b-2 border-gray-300' >
             <Commentlist mockData={c.replies}/>
         </div>}
           </div>
