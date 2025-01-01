@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleMenu } from '../utils/appSlice';
-import { Link } from 'react-router-dom';
+import { Link, Links } from 'react-router-dom';
 import { storeCache } from '../utils/cacheSlice';
 
 
@@ -94,7 +94,7 @@ useEffect(()=>{
         <button className='py-[5px] px-4 border border-gray-300 rounded-r-full '>Search</button>
         <div className='bg-gray-100 w-[90%] absolute  rounded-md shadow-lg' >
           <ul>
-           {suggestion.map(data=> <li key={data} className='border border-b-2 p-2 hover:bg-gray-200 rounded-md' >🔍{data}</li>)}
+           {suggestion && suggestion.map(data=> <Link key={data} to={`/search?search_query=${data}`} > <li  className='border border-b-2 p-2 hover:bg-gray-200 rounded-md' >🔍{data}</li></Link>)}
           </ul>
         </div>
       </div>
